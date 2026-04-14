@@ -1,0 +1,21 @@
+config:
+  target: "http://localhost:5000"
+  timeout: 30
+  phases:
+    - duration: 1
+      arrivalRate: 300
+      name: "300 users login at same time"
+  defaults:
+    headers:
+      Content-Type: application/json
+
+scenarios:
+  - name: "Concurrent Login"
+    flow:
+      - post:
+          url: "/api/user/login"
+          json:
+            email: "b29.bhupesh@gmail.com"
+            password: "Bhupesh@1234"
+          expect:
+            - statusCode: 200

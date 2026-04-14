@@ -1,0 +1,24 @@
+import { Router } from "express";
+import userRouter from "./user.router.js";
+import instituteRouter from "./institute.router.js";
+import serviceRouter from "./service.router.js";
+import serviceRequestRouter from "./serviceRequest.router.js";
+import workflowRouter from "./workflow.router.js";
+import queueRouter from "./queue.router.js";
+import documentRouter from "./document.router.js";
+import exportRouter from "./export.router.js";
+import chatRouter from "./chat.router.js";
+import notificationRouter from "./notification.router.js";
+
+const router = Router();
+router.use("/user", userRouter);
+router.use("/institute", instituteRouter);
+router.use("/service", serviceRouter);
+router.use("/service-request", serviceRequestRouter);
+router.use("/workflow", workflowRouter);
+router.use("/queue", queueRouter);
+router.use("/document", documentRouter);
+router.use("/export", exportRouter);
+router.use("/chat", chatRouter);
+router.use("/notification", notificationRouter);
+export default router;

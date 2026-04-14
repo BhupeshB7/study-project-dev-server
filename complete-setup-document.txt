@@ -1,0 +1,180 @@
+How to Run study-project-server
+====================================================
+
+This guide will help you set up and run the study-project-server backend on your Windows computer. Every step is explained for complete beginners!
+
+----------------------------------------------------
+
+1. Prerequisites
+----------------
+
+1.1. Node.js
+- Go to https://nodejs.org/
+- Click the big green LTS download button.
+- Run the installer (just keep clicking Next).
+- To check if it's installed:
+  - Open Command Prompt (press Windows key, type "cmd", press Enter)
+  - Type:
+    node --version
+    npm --version
+  - You should see version numbers (e.g., v20.0.0)
+
+1.2. MongoDB
+- Go to https://www.mongodb.com/try/download/community
+- Download the installer and run it.
+- When asked for install path, you can use the default (e.g., C:\Program Files\MongoDB\Server\6.0\) or choose your own.
+- Make sure to check "Install MongoDB as a Service" (recommended: Network Service user).
+- When finished, MongoDB will run in the background.
+- To add MongoDB to your PATH (so you can use it anywhere):
+  - Open Start menu, search "Environment Variables", click "Edit the system environment variables"
+  - Click "Environment Variables..."
+  - Under "System variables", find "Path", click Edit
+  - Click New, add: C:\Program Files\MongoDB\Server\6.0\bin
+  - Click OK on all windows
+- To check MongoDB:
+  - Open Command Prompt
+  - Type:
+    mongo --version
+    mongod --version
+  - You should see version info. If not, check your PATH.
+- To start MongoDB if not running:
+  - Open Services (search in Start menu), find "MongoDB Server", right-click, Start
+  - Or in Command Prompt:
+    net start MongoDB
+
+1.3. Set up MongoDB Replica Set (for advanced features)
+- Stop MongoDB if running:
+  net stop MongoDB
+- Create a folder for data (if not already):
+  mkdir C:\data\db
+- Start MongoDB with replica set:
+  mongod --dbpath C:\data\db --replSet rs0
+- Open a new Command Prompt:
+  mongosh
+- In the shell, type:
+  rs.initiate()
+- You should see { "ok" : 1 }
+
+1.4. Redis (using WSL - Windows Subsystem for Linux)
+- Open PowerShell as Administrator (right-click, Run as administrator)
+- Type:
+  wsl --install
+- Restart your computer if asked.
+- Open Ubuntu from Start menu (it will set up, ask for username/password)
+- In Ubuntu terminal, type:
+  sudo apt update
+  sudo apt install redis-server
+- Start Redis:
+  sudo service redis-server start
+- To always start Redis on boot:
+  sudo systemctl enable redis-server
+- Test Redis:
+  redis-cli ping
+  (Should reply: PONG)
+
+----------------------------------------------------
+
+2. Clone the Project
+--------------------
+- Open Command Prompt or PowerShell
+- Go to the folder you want (e.g., Desktop):
+  cd C:\Users\YourName\Desktop
+- Download the code:
+  git clone  https://github.com/BhupeshB7/study-project-server
+  cd study-project-server
+  (If you don't have git, download ZIP from GitHub and extract it)
+
+----------------------------------------------------
+
+3. Install Dependencies
+----------------------
+- In the project folder, type:
+  npm install
+- This will download everything needed for the project.
+
+----------------------------------------------------
+
+4. Configure Environment Variables
+----------------------------------
+- In the project folder, find `.env.example` and copy it to `.env` (or just create a new file called `.env`)
+- Open `.env` in Notepad or VS Code
+- Fill in the values. Example:
+  NODE_ENV=development #production or development
+PORT=5000
+IMAGEKIT_PUBLIC_KEY==public_pCUdbevqSAGnxKNr5nlSVjKJfDw=
+IMAGEKIT_PRIVATE_KEY=private_6TcMqBguj3SXIGvYElJoXpr8irQ=
+IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/bhupeshb29
+MONGODB_URI=mongodb+srv://bhupeshkr2912_db_user:RpMt2sKlC8ioH7JJ@cluster0.oeltg21.mongodb.net/?appName=Cluster0
+GITHUB_CLIENT_ID=Ov23liP1Xobnnmj9cjm5
+GITHUB_CLIENT_SECRET=774f854428bcfe944a8a2a382f55336d20a3d4c2
+GITHUB_REDIRECT_URI=http://localhost:5173/login
+CLIENT_URL=http://localhost:5173
+COOKIE_SECRET=study_project_cookie_secret
+REDIS_HOST=127.0.0.1
+REDIS_PORT=6379
+EMAIL_USER=powerfulindia850@gmail.com
+EMAIL_PASSWORD=pqyc aidu fqcw sdod
+EMAIL_FROM=Study Project <powerfulindia850@gmail.com>
+- Save the file.
+
+----------------------------------------------------
+
+5. Start the Server
+-------------------
+- In the project folder, type:
+  npm run start
+- You should see messages like:
+  MongoDB connected
+  Redis connection established
+  Server running on http://localhost:5000
+
+----------------------------------------------------
+
+6. Test the API
+---------------
+- Open your web browser
+- Go to:
+  http://localhost:5000/health   (should show: Server is healthy)
+  http://localhost:5000/docs     (API documentation)
+
+----------------------------------------------------
+
+7. Troubleshooting (Common Problems)
+------------------------------------
+- MongoDB not running?
+  - Open Services and start "MongoDB Server"
+  - Or run: net start MongoDB
+- MongoDB command not found?
+  - Check your PATH variable (see above)
+- Replica set error?
+  - Make sure you started mongod with --replSet rs0 and ran rs.initiate()
+- Redis not running?
+  - Open Ubuntu (WSL) and run: sudo service redis-server start
+- Port already in use?
+  - Change PORT in your .env file
+- Environment variables not set?
+  - Double-check your .env file
+
+----------------------------------------------------
+
+8. Useful Commands
+------------------
+- Start server: npm run start
+- Install dependencies: npm install
+- Check Node version: node --version
+- Check npm version: npm --version
+- Check MongoDB version: mongo --version
+- Check Redis version (in Ubuntu/WSL): redis-server --version
+
+----------------------------------------------------
+
+9. Need Help?
+-------------
+- Read the error messages carefully
+- Check the logs in your terminal
+- Review this guide and your .env file
+- Message on chat-groups or contact me
+
+----------------------------------------------------
+
+Happy coding!
