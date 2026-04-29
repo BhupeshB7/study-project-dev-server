@@ -7,6 +7,13 @@ export const SERVICE_PERMISSIONS = {
   SERVICE_APPLY: "service.apply",
 };
 
+export const SERVICE_CONFIG_PERMISSIONS = {
+  SERVICE_CONFIG_CREATE: "service_config.create",
+  SERVICE_CONFIG_UPDATE: "service_config.update",
+  SERVICE_CONFIG_DELETE: "service_config.delete",
+  SERVICE_CONFIG_VIEW: "service_config.view",
+};
+
 export const REQUEST_PERMISSIONS = {
   REQUEST_CREATE: "request.create",
   REQUEST_VIEW: "request.view",
